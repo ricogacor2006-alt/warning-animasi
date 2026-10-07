@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WARNING INDONESIA</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #050505;
+            color: #ff0000;
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Efek Garis-garis Televisi Tabung (CRT Scanlines) */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 99;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        /* Efek Vignette Gelap di Pinggir Layar */
+        .vignette {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.95);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Kontainer Utama */
+        .warning-container {
+            text-align: center;
+            z-index: 5;
+            position: relative;
+            padding: 20px;
+            width: 100%;
+        }
+
+        /* Ikon Peringatan (Segitiga Tanda Seru) Bergaya Horor */
+        .warning-icon {
+            width: 120px;
+            height: 105px;
+            margin: 0 auto 20px auto;
+            position: relative;
+            animation: iconGlitch 0.8s infinite alternate;
+        }
+
+        .warning-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: #ff0000;
+            filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.8));
+        }
+
+        /* Teks Utama Dibuat Sangat Besar & Responsif */
+        h1 {
+            font-size: clamp(3rem, 7vw, 7rem); /* Ukuran sangat besar dan menyesuaikan layar */
+            letter-spacing: 6px;
+            font-weight: 900;
+            text-transform: uppercase;
+            position: relative;
+            color: #ff1111;
+            text-shadow: 3px 0px 15px rgba(255, 0, 0, 0.9),
+                         -3px 0px 15px rgba(0, 0, 0, 0.9),
+                         0 0 30px rgba(255, 0, 0, 0.5);
+            animation: glitch 1s infinite alternate;
+            line-height: 1.1;
+        }
+
+        /* Sub-teks / Pesan Ancaman */
+        p {
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            margin-top: 25px;
+            color: #ffffff;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            opacity: 0.85;
+            animation: flickerText 2s infinite;
+        }
+
+        /* Tombol Mulai */
+        .start-btn {
+            margin-top: 40px;
+            background: transparent;
+            border: 2px solid #ff0000;
+            color: #ff0000;
+            padding: 14px 35px;
+            font-size: 1.3rem;
+            font-family: 'Courier New', Courier, monospace;
+            cursor: pointer;
+            letter-spacing: 3px;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .start-btn:hover {
+            background: #ff0000;
+            color: #000;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.9);
+        }
+
+        /* Animasi Glitch Teks */
+        @keyframes glitch {
+            0% {
+                transform: skew(0deg);
+                text-shadow: 3px 0px 15px rgba(255, 0, 0, 0.9);
+            }
+            20% {
+                transform: skew(-8deg) translate(-6px, 3px);
+                text-shadow: -6px 0px 25px rgba(255, 255, 255, 0.9);
+            }
+            40% {
+                transform: skew(8deg) translate(6px, -3px);
+            }
+            60% {
+                transform: skew(-4deg) translate(-3px, 1px);
+            }
+            80% {
+                transform: skew(4deg) translate(3px, -1px);
+            }
+            100% {
+                transform: skew(0deg);
+                text-shadow: 3px 0px 15px rgba(255, 0, 0, 0.9);
+            }
+        }
+
+        /* Animasi Ikon Glitch */
+        @keyframes iconGlitch {
+            0% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.8)); }
+            25% { transform: scale(1.05) rotate(-2deg); filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.9)); }
+            50% { transform: scale(0.95) rotate(2deg); }
+            75% { transform: scale(1.02) rotate(-1deg); }
+            100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.8)); }
+        }
+
+        /* Animasi Kedipan Teks */
+        @keyframes flickerText {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 0.9;
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            }
+            20%, 24%, 55% {
+                opacity: 0.2;
+                text-shadow: none;
+            }
+        }
+
+        /* Efek Berkedip Merah Seluruh Layar */
+        .flash-bg {
+            animation: redFlash 0.15s infinite alternate;
+        }
+
+        @keyframes redFlash {
+            0% { background-color: #050505; }
+            100% { background-color: #4a0000; }
+        }
+    </style>
+</head>
+<body id="body">
+
+    <div class="vignette"></div>
+
+    <div class="warning-container" id="content">
+        <!-- Ikon Segitiga Peringatan SVG Bawaan -->
+        <div class="warning-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2L1 21h22M12 6l7.53 13H4.47M11 10v4h2v-4M11 16v2h2v-2"/>
+            </svg>
+        </div>
+        
+        <h1>WARNING<br>INDONESIA</h1>
+        <p id="subtext">THERE IS NO WAY OUT</p>
+        <button class="start-btn" onclick="triggerHorror()">VIEW ISSUE</button>
+    </div>
+
+    <script>
+        function triggerHorror() {
+            // Ubah background jadi berkedip intens
+            document.getElementById('body').classList.add('flash-bg');
+            
+            // Hilangkan tombol setelah diklik
+            document.querySelector('.start-btn').style.display = 'none';
+
+            // Ubah teks secara dinamis memberi kesan horor
+            const subtext = document.getElementById('subtext');
+            const messages = [
+                "MEREKA TELAH MENGETAHUI...",
+                "PANTAUAN SATELIT AKTIF",
+                "DARURAT NASIONAL",
+                "TETAP DI DALAM RUMAH",
+                "JANGAN MELIHAT KELUAR JENDELA"
+            ];
+            
+            let i = 0;
+            setInterval(() => {
+                subtext.innerText = messages[i];
+                i = (i + 1) % messages.length;
+            }, 2500);
+
+            // Efek suara dengungan horor (Synthesizer Web API)
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(55, audioCtx.currentTime); 
+                osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 2);
+
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+            } catch (e) {
+                console.log("Audio diblokir atau tidak didukung browser.");
+            }
+        }
+    </script>
+</body>
+</html>
